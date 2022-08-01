@@ -15,7 +15,9 @@ requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
+dynamic = ["version"]
 
 [project.urls]
 "Homepage" = "https://github.com/Whynot63/web3-premium/"
 "Bug Tracker" = "https://github.com/Whynot63/web3-premium/issues"
+[tool]
