@@ -15,6 +15,9 @@ requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
+dependencies = [
+  "web3>=5.29.0",
+]
 dynamic = ["version"]
 
 [project.urls]
