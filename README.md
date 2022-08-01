@@ -1,6 +1,11 @@
 # web3-premium
 Data Science friendly wrapper for web3py
 
+## Installation
+```
+python3 -m pip install web3_premium
+```
+
 
 ## Explorers wrapper
 

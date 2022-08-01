@@ -18,9 +18,10 @@ classifiers = [
 dependencies = [
   "web3>=5.29.0",
 ]
-dynamic = ["version"]
 
 [project.urls]
 "Homepage" = "https://github.com/Whynot63/web3-premium/"
 "Bug Tracker" = "https://github.com/Whynot63/web3-premium/issues"
-[tool]
+
+[tool.hatch.version]
+source = "vcs"
