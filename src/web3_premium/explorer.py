@@ -1,3 +1,4 @@
+import time
 import requests
 from typing import Callable
 
@@ -17,11 +18,17 @@ class ExplorerAction:
         self.module = module
         self.action = action
 
-    def __call__(self, **kwargs):
-        r = requests.get(
-            self.module.explorer.url,
-            params={"module": str(self.module), "action": self.action, **kwargs},
-        )
+    def __call__(self, **params):
+        params["module"] = str(self.module)
+        params["action"] = self.action
+        if self.module.explorer.api_key is not None:
+            params["apikey"] = self.module.explorer.api_key
+
+        if "apikey" not in params:
+            # stupid throtling
+            time.sleep(5)
+
+        r = requests.get(self.module.explorer.url, params=params)
         result = r.json()
         if result["status"] != "1":
             raise ExplorerError(result["message"], result["result"])
@@ -41,8 +48,12 @@ class ExplorerModule:
 
 
 class Explorer:
-    def __init__(self, url) -> None:
+    def __init__(self, url, api_key=None) -> None:
         self.url = url
+        self.api_key = None
+
+    def set_api_key(self, api_key):
+        self.api_key = api_key
 
     def __getattr__(self, module: str) -> ExplorerModule:
         return ExplorerModule(self, module)
