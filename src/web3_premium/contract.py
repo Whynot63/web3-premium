@@ -1,14 +1,16 @@
 from eth_utils import is_hex_address, to_checksum_address
 from web3 import Web3
 
-from .utils import fetch_abi
+
+from .explorer import Explorer
 from .mappings import CHAIN_TO_EXPLORER
+from .utils import fetch_abi
 
 
 class Contract:
-    def __init__(self, address, chain: Web3) -> None:
+    def __init__(self, address, chain: Web3, explorer: Explorer = None) -> None:
         self.address = to_checksum_address(address)
-        self.explorer = CHAIN_TO_EXPLORER[chain]
+        self.explorer = explorer or CHAIN_TO_EXPLORER[chain]
         self.abi = fetch_abi(self.explorer, address)
         self._contract = chain.eth.contract(self.address, abi=self.abi)
 
