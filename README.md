@@ -62,6 +62,6 @@ BLOCK = 15253306
 
 usdt = Contract("0xdaC17F958D2ee523a2206206994597C13D831ec7", ethereum)
 burnedUsdt = usdt.balanceOf("0x0000000000000000000000000000000000000000", block=BLOCK)
-
+```
 
 
