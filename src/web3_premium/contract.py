@@ -7,10 +7,12 @@ from .utils import fetch_abi
 
 
 class Contract:
-    def __init__(self, address, chain: Chain, explorer: Explorer = None) -> None:
+    def __init__(
+        self, address, chain: Chain, explorer: Explorer = None, abi=None
+    ) -> None:
         self.address = to_checksum_address(address)
         self.explorer = explorer or chain.explorer
-        self.abi = fetch_abi(self.explorer, address)
+        self.abi = abi or fetch_abi(self.explorer, address)
         self._contract = chain.eth.contract(self.address, abi=self.abi)
 
     def __getattr__(self, method_name):
