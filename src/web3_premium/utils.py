@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 from typing import Literal
 
+from .chains import Chain
 from .explorer import Explorer
 
 
@@ -23,3 +24,7 @@ def get_block_by_datetime(
     return explorer.block.getblocknobytime(
         timestamp=int(dt.timestamp()), closest=closest
     )
+
+
+def get_datetime_by_block(chain: Chain, block: int):
+    return datetime.fromtimestamp(chain.eth.get_block(block).timestamp)

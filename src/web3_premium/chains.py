@@ -16,7 +16,7 @@ class Chain(Web3):
     explorer: Explorer | None
 
 
-def chain_w3(rpc, explorer=None):
+def chain_w3(rpc, explorer=None) -> Chain:
     w3 = Web3(Web3.HTTPProvider(rpc))
     w3.explorer = explorer
     return w3
