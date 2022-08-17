@@ -4,14 +4,14 @@ build-backend = "hatchling.build"
 
 [project]
 name = "web3_premium"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   { name="Dmitry Andreev", email="deal.d@me.com" },
 ]
 description = "Data Science friendly wrapper for web3py"
 readme = "README.md"
 license = { file="LICENSE" }
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
