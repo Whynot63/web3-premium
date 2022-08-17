@@ -1,4 +1,6 @@
 import json
+from datetime import datetime
+from typing import Literal
 
 from .explorer import Explorer
 
@@ -13,3 +15,11 @@ def fetch_abi(explorer: Explorer, address: str):
         abi = json.loads(implementation_info["ABI"])
 
     return abi
+
+
+def get_block_by_datetime(
+    explorer: Explorer, dt: datetime, closest: Literal["before", "after"] = "before"
+):
+    return explorer.block.getblocknobytime(
+        timestamp=int(dt.timestamp()), closest=closest
+    )
