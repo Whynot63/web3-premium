@@ -1,3 +1,5 @@
+from typing import Optional
+
 from web3 import Web3
 
 from .explorer import (
@@ -13,7 +15,7 @@ from .explorer import (
 
 
 class Chain(Web3):
-    explorer: Explorer | None
+    explorer: Optional[Explorer]
 
 
 def chain_w3(rpc, explorer=None) -> Chain:
