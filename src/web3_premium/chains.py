@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from typing import Optional
 
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
+
 
 from .explorer import (
     Explorer,
@@ -26,10 +28,15 @@ class Chain(Web3):
     native_token: Optional[NativeToken]
 
 
-def chain_w3(rpc, explorer=None, symbol: str = None, decimals=18) -> Chain:
+def chain_w3(
+    rpc, explorer=None, symbol: str = None, decimals=18, poa_middleware=True
+) -> Chain:
     w3 = Web3(Web3.HTTPProvider(rpc))
     w3.explorer = explorer
     w3.native_token = NativeToken(symbol, decimals) if symbol else None
+    if poa_middleware:
+        w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+
     return w3
 
 
