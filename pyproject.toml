@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "web3_premium"
-version = "0.0.9"
+version = "0.0.10"
 authors = [
   { name="Dmitry Andreev", email="deal.d@me.com" },
 ]
@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-  "web3>=5.29.0",
+  "web3>=5.30.0",
 ]
 
 [project.urls]
