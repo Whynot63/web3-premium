@@ -28,11 +28,17 @@ class Chain(Web3):
     explorer: Optional[Explorer]
     native_token: Optional[NativeToken]
 
-    def contract(self, *args, **kwargs):
-        return Contract(*args, chain=self, **kwargs)
+    def contract(chain):
+        def _contract(*args, **kwargs):
+            return Contract(*args, chain=chain, **kwargs)
 
-    def get_datetime_by_block(self, block):
-        return utils.get_datetime_by_block(self, block)
+        return _contract
+
+    def get_datetime_by_block(chain):
+        def _get_datetime_by_block(block):
+            return utils.get_datetime_by_block(chain, block)
+
+        return _get_datetime_by_block
 
 
 def chain_w3(
@@ -43,6 +49,9 @@ def chain_w3(
     w3.native_token = NativeToken(symbol, decimals) if symbol else None
     if poa_middleware:
         w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+
+    w3.contract = Chain.contract(w3)
+    w3.get_datetime_by_block = Chain.get_datetime_by_block(w3)
 
     return w3
 
