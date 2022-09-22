@@ -4,7 +4,7 @@ from typing import Optional
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
 
-
+from .contract import Contract
 from .explorer import (
     Explorer,
     etherscan,
@@ -15,6 +15,7 @@ from .explorer import (
     optimistic_etherscan,
     polygonscan,
 )
+import utils
 
 
 @dataclass
@@ -26,6 +27,12 @@ class NativeToken:
 class Chain(Web3):
     explorer: Optional[Explorer]
     native_token: Optional[NativeToken]
+
+    def contract(self, *args, **kwargs):
+        return Contract(*args, chain=self, **kwargs)
+
+    def get_datetime_by_block(self, block):
+        return utils.get_datetime_by_block(self, block)
 
 
 def chain_w3(
