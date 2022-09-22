@@ -1,14 +1,18 @@
+from typing import TYPE_CHECKING
+
 from eth_utils import is_hex_address, to_checksum_address
 
 
-from .chains import Chain
+if TYPE_CHECKING:
+    from .chains import Chain
+
 from .explorer import Explorer
 from .utils import fetch_abi
 
 
 class Contract:
     def __init__(
-        self, address, chain: Chain, explorer: Explorer = None, abi=None
+        self, address, chain: "Chain", explorer: Explorer = None, abi=None
     ) -> None:
         self.address = to_checksum_address(address)
         self.explorer = explorer or chain.explorer

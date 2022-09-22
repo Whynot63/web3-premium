@@ -1,12 +1,13 @@
 import json
 from datetime import datetime
-from typing import Literal
+from typing import Literal, TYPE_CHECKING
 
-from .chains import Chain
-from .explorer import Explorer
+if TYPE_CHECKING:
+    from .chains import Chain
+    from .explorer import Explorer
 
 
-def fetch_abi(explorer: Explorer, address: str):
+def fetch_abi(explorer: "Explorer", address: str):
     contract_info = explorer.contract.getsourcecode(address=address)[0]
     abi = json.loads(contract_info["ABI"])
     if contract_info["Proxy"] == "1":
@@ -19,12 +20,12 @@ def fetch_abi(explorer: Explorer, address: str):
 
 
 def get_block_by_datetime(
-    explorer: Explorer, dt: datetime, closest: Literal["before", "after"] = "before"
+    explorer: "Explorer", dt: datetime, closest: Literal["before", "after"] = "before"
 ):
     return explorer.block.getblocknobytime(
         timestamp=int(dt.timestamp()), closest=closest
     )
 
 
-def get_datetime_by_block(chain: Chain, block: int):
+def get_datetime_by_block(chain: "Chain", block: int):
     return datetime.fromtimestamp(chain.eth.get_block(block).timestamp)

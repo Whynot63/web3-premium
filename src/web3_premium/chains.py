@@ -15,7 +15,7 @@ from .explorer import (
     optimistic_etherscan,
     polygonscan,
 )
-import utils
+from . import utils
 
 
 @dataclass

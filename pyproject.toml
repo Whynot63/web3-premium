@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "web3_premium"
-version = "0.0.11"
+version = "0.0.12"
 authors = [
   { name="Dmitry Andreev", email="deal.d@me.com" },
 ]
