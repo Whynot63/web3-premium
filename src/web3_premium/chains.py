@@ -58,15 +58,17 @@ def chain_w3(
     return w3
 
 
-ethereum = chain_w3("https://rpc.ankr.com/eth", etherscan, "ETH", "ethereum")
-avalanche = chain_w3("https://rpc.ankr.com/avalanche", snowtrace, "AVAX", "avalanche")
-fantom = chain_w3("https://rpc.ankr.com/fantom", ftmscan, "FTM", "fantom")
-arbitrum = chain_w3("https://rpc.ankr.com/arbitrum", arbiscan, "ETH", "arbitrum")
-bsc = chain_w3("https://rpc.ankr.com/bsc", bscscan, "BNB", "bsc")
-optimism = chain_w3(
-    "https://rpc.ankr.com/optimism", optimistic_etherscan, "ETH", "optimism"
+ethereum = chain_w3("https://rpc.ankr.com/eth", etherscan, "ETH", name="ethereum")
+avalanche = chain_w3(
+    "https://rpc.ankr.com/avalanche", snowtrace, "AVAX", name="avalanche"
 )
-polygon = chain_w3("https://rpc.ankr.com/polygon", polygonscan, "MATIC", "polygon")
+fantom = chain_w3("https://rpc.ankr.com/fantom", ftmscan, "FTM", name="fantom")
+arbitrum = chain_w3("https://rpc.ankr.com/arbitrum", arbiscan, "ETH", name="arbitrum")
+bsc = chain_w3("https://rpc.ankr.com/bsc", bscscan, "BNB", name="bsc")
+optimism = chain_w3(
+    "https://rpc.ankr.com/optimism", optimistic_etherscan, "ETH", name="optimism"
+)
+polygon = chain_w3("https://rpc.ankr.com/polygon", polygonscan, "MATIC", name="polygon")
 
 
 CHAINS = {
