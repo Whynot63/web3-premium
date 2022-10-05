@@ -27,6 +27,7 @@ class NativeToken:
 class Chain(Web3):
     explorer: Optional[Explorer]
     native_token: Optional[NativeToken]
+    name: str
 
     def contract(chain):
         def _contract(*args, **kwargs):
@@ -42,11 +43,12 @@ class Chain(Web3):
 
 
 def chain_w3(
-    rpc, explorer=None, symbol: str = None, decimals=18, poa_middleware=True
+    rpc, explorer=None, symbol: str = None, decimals=18, poa_middleware=True, name=""
 ) -> Chain:
     w3 = Web3(Web3.HTTPProvider(rpc))
     w3.explorer = explorer
     w3.native_token = NativeToken(symbol, decimals) if symbol else None
+    w3.name = name
     if poa_middleware:
         w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
@@ -56,10 +58,18 @@ def chain_w3(
     return w3
 
 
-ethereum = chain_w3("https://rpc.ankr.com/eth", etherscan, "ETH")
-avalanche = chain_w3("https://rpc.ankr.com/avalanche", snowtrace, "AVAX")
-fantom = chain_w3("https://rpc.ankr.com/fantom", ftmscan, "FTM")
-arbitrum = chain_w3("https://rpc.ankr.com/arbitrum", arbiscan, "ETH")
-bsc = chain_w3("https://rpc.ankr.com/bsc", bscscan, "BNB")
-optimism = chain_w3("https://rpc.ankr.com/optimism", optimistic_etherscan, "ETH")
-polygon = chain_w3("https://rpc.ankr.com/polygon", polygonscan, "MATIC")
+ethereum = chain_w3("https://rpc.ankr.com/eth", etherscan, "ETH", "ethereum")
+avalanche = chain_w3("https://rpc.ankr.com/avalanche", snowtrace, "AVAX", "avalanche")
+fantom = chain_w3("https://rpc.ankr.com/fantom", ftmscan, "FTM", "fantom")
+arbitrum = chain_w3("https://rpc.ankr.com/arbitrum", arbiscan, "ETH", "arbitrum")
+bsc = chain_w3("https://rpc.ankr.com/bsc", bscscan, "BNB", "bsc")
+optimism = chain_w3(
+    "https://rpc.ankr.com/optimism", optimistic_etherscan, "ETH", "optimism"
+)
+polygon = chain_w3("https://rpc.ankr.com/polygon", polygonscan, "MATIC", "polygon")
+
+
+CHAINS = {
+    chain.name: chain
+    for chain in [ethereum, avalanche, fantom, arbitrum, bsc, optimism, polygon]
+}
