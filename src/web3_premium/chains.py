@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from typing import Optional
 
@@ -58,17 +59,45 @@ def chain_w3(
     return w3
 
 
-ethereum = chain_w3("https://rpc.ankr.com/eth", etherscan, "ETH", name="ethereum")
+ethereum = chain_w3(
+    os.getenv("ETHEREUM_RPC", "https://rpc.ankr.com/eth"),
+    etherscan,
+    "ETH",
+    name="ethereum",
+)
 avalanche = chain_w3(
-    "https://rpc.ankr.com/avalanche", snowtrace, "AVAX", name="avalanche"
+    os.getenv("AVALANCHE_RPC", "https://rpc.ankr.com/avalanche"),
+    snowtrace,
+    "AVAX",
+    name="avalanche",
 )
-fantom = chain_w3("https://rpc.ankr.com/fantom", ftmscan, "FTM", name="fantom")
-arbitrum = chain_w3("https://rpc.ankr.com/arbitrum", arbiscan, "ETH", name="arbitrum")
-bsc = chain_w3("https://rpc.ankr.com/bsc", bscscan, "BNB", name="bsc")
+fantom = chain_w3(
+    os.getenv("FANTOM_RPC", "https://rpc.ankr.com/fantom"),
+    ftmscan,
+    "FTM",
+    name="fantom",
+)
+arbitrum = chain_w3(
+    os.getenv("ARBITRUM_RPC", "https://rpc.ankr.com/arbitrum"),
+    arbiscan,
+    "ETH",
+    name="arbitrum",
+)
+bsc = chain_w3(
+    os.getenv("BSC_RPC", "https://rpc.ankr.com/bsc"), bscscan, "BNB", name="bsc"
+)
 optimism = chain_w3(
-    "https://rpc.ankr.com/optimism", optimistic_etherscan, "ETH", name="optimism"
+    os.getenv("OPTIMISM_RPC", "https://rpc.ankr.com/optimism"),
+    optimistic_etherscan,
+    "ETH",
+    name="optimism",
 )
-polygon = chain_w3("https://rpc.ankr.com/polygon", polygonscan, "MATIC", name="polygon")
+polygon = chain_w3(
+    os.getenv("POLYGON_RPC", "https://rpc.ankr.com/polygon"),
+    polygonscan,
+    "MATIC",
+    name="polygon",
+)
 
 
 CHAINS = {

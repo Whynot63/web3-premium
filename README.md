@@ -65,3 +65,5 @@ burnedUsdt = usdt.balanceOf("0x0000000000000000000000000000000000000000", block=
 ```
 
 
+## Custom node for predefined chains
+You can set env variable for overriding default rpc (ankr). For example, for ethereum you should set `ETHEREUM_RPC=infura.com/....`
