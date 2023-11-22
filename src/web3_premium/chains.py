@@ -15,6 +15,7 @@ from .explorer import (
     bscscan,
     optimistic_etherscan,
     polygonscan,
+    basescan,
 )
 from . import utils
 
@@ -97,6 +98,12 @@ polygon = chain_w3(
     polygonscan,
     "MATIC",
     name="polygon",
+)
+base = chain_w3(
+    os.getenv("BASE_RPC", "https://rpc.ankr.com/base"),
+    basescan,
+    "ETH",
+    name="base",
 )
 
 
